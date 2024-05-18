@@ -1,6 +1,7 @@
 import { MdHomeFilled } from "react-icons/md";
 import { RiMovie2Line } from "react-icons/ri";
 import { BiMovie } from "react-icons/bi";
+import { IoSearchOutline } from "react-icons/io5";
 
 export const navigation = [
   {
@@ -23,4 +24,9 @@ export const mobileNavigation = [
   },
 
   ...navigation,
+  {
+    label: "Arama",
+    href: "/search",
+    icon: <IoSearchOutline />,
+  },
 ];
