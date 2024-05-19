@@ -22,9 +22,9 @@ const BannerHome = () => {
                 />
               </div>
 
-              <div className="absolute top-0 w-full h-full bg-gradient-to-t from-neutral-900 to-transparent"></div>
-              <div className="container mx-auto absolute bottom-0 max-w-md">
-                <h2 className="font-bold text-3xl">{data.title}</h2>
+              <div className="absolute top-0 w-full h-full bg-gradient-to-t from-neutral-900"></div>
+              <div className="container mx-auto absolute bottom-0 max-w-md px-3">
+                <h2 className="font-bold text-2xl">{data.title}</h2>
               </div>
             </div>
           );
