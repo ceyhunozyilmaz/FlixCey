@@ -13,7 +13,7 @@ axios.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${process.env.REACT_APP_ACCES_TOKEN}`;
 
-console.log("Access Token:", process.env.REACT_APP_ACCES_TOKEN);
+// console.log("Access Token:", process.env.REACT_APP_ACCES_TOKEN);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
