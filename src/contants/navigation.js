@@ -6,7 +6,7 @@ import { IoSearchOutline } from "react-icons/io5";
 export const navigation = [
   {
     label: "Diziler",
-    href: "series",
+    href: "tv",
     icon: <BiMovie />,
   },
   {

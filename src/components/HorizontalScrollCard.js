@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
-const HorizontalScrollCard = ({ data = [], heading }) => {
+const HorizontalScrollCard = ({ data = [], heading, trending }) => {
   const containerRef = useRef();
 
   const handleNext = () => {
@@ -29,12 +29,12 @@ const HorizontalScrollCard = ({ data = [], heading }) => {
                 key={data.id + "heading" + index}
                 data={data}
                 index={index + 1}
-                trending={true}
+                trending={trending}
               />
             );
           })}
         </div>
-        <div className="absolute top-0 flex justify-between w-full h-full items-center">
+        <div className="absolute top-0 hidden lg:flex justify-between w-full h-full items-center">
           <button
             onClick={handlePrevious}
             className="bg-white p-1 text-black rounded-full -ml-2 z-10"
