@@ -27,7 +27,7 @@ const BannerHome = () => {
       } else {
         setCurrentImage(0);
       }
-    }, 2000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [bannerData, imageUrl]);
 
@@ -37,7 +37,7 @@ const BannerHome = () => {
         {bannerData.map((data, index) => {
           return (
             <div
-              key={index}
+              key={data.id + "bannerHome" + index}
               className="min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative transition-all group"
               style={{ transform: `translateX(-${curretImage * 100}%)` }}
             >
@@ -74,7 +74,7 @@ const BannerHome = () => {
                     {data.overview}
                   </p>
                   <div className="flex items-center gap-4">
-                    <p>Raiting: {Number(data.vote_average).toFixed(1)}+</p>
+                    <p>Rating: {Number(data.vote_average).toFixed(1)}+</p>
                     <span>|</span>
                     <p>İzlenme Sayısı: {Number(data.popularity).toFixed(0)}</p>
                   </div>
