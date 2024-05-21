@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import user from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../contants/navigation";
 
 const Header = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const location = useLocation();
+  const removeSpace = location?.search?.slice(3).split("%20")?.join(" ");
+  const [searchInput, setSearchInput] = useState(removeSpace);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,16 +49,16 @@ const Header = () => {
           })}
         </nav>
         {/* SEARCH BUTTON */}
-        <div className="ml-auto flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-12">
           <form className="flex items-center gap-2" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Arama motoru"
+              placeholder="Arama motoru..."
               className="bg-transparent px-4 py-1 outline-none border-none hidden lg:block"
               onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
             />
-            <button className="text-2xl text-white">
+            <button className="text-2xl text-white hidden lg:block">
               <IoSearchOutline />
             </button>
           </form>

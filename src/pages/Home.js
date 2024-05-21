@@ -19,13 +19,26 @@ const Home = () => {
         heading={"Trend"}
         trending={true}
       />
-      <HorizontalScrollCard data={popularSeries} heading={"Popüler Diziler"} />
-      <HorizontalScrollCard data={upcomingData} heading={"Yakında Eklenecek"} />
+      <HorizontalScrollCard
+        data={popularSeries}
+        heading={"Popüler Diziler"}
+        media_type={"tv"}
+      />
+      <HorizontalScrollCard
+        data={upcomingData}
+        heading={"Yakında Eklenecek"}
+        media_type={"tv" && "movie"}
+      />
       <HorizontalScrollCard
         data={topRatedSeries}
         heading={"En Beğenilen Diziler"}
+        media_type={"tv"}
       />
-      <HorizontalScrollCard data={nowPlayingData} heading={"Şu Anda İzlenen"} />
+      <HorizontalScrollCard
+        data={nowPlayingData}
+        heading={"Şu Anda İzlenen"}
+        media_type={"movie"}
+      />
     </div>
   );
 };

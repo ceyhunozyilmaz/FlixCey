@@ -9,7 +9,7 @@ const ExplorePage = () => {
   const [data, setData] = useState([]);
   const [totalPageNo, setTotalPageNo] = useState(0);
 
-  console.log("params", params.explore);
+  // console.log("params", params.explore);
 
   const fetchData = async () => {
     try {
@@ -59,7 +59,7 @@ const ExplorePage = () => {
             return (
               <Card
                 data={exploreData}
-                key={exploreData.id + "exploreSEction"}
+                key={`${exploreData.id}-${index}-exploreSection`}
                 media_type={params.explore}
               />
             );
