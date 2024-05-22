@@ -30,7 +30,7 @@ const BannerHome = () => {
       }
     }, 5000);
     return () => clearInterval(interval);
-  }, [bannerData, imageUrl]);
+  }, [bannerData, imageUrl, curretImage]);
 
   return (
     <section className="w-full h-full">
