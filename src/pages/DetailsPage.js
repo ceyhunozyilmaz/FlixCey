@@ -145,12 +145,12 @@ const DetailsPage = () => {
       <div>
         <HorizontalScrollCard
           data={similarData}
-          heading={"Similar " + params?.explore}
+          heading="Buna Benzer İçerikler"
           media_type={params?.explore}
         />
         <HorizontalScrollCard
           data={recommendationData}
-          heading={"Recommendation " + params?.explore}
+          heading="Beğenilen İçerikler"
           media_type={params?.explore}
         />
       </div>
