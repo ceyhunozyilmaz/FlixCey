@@ -1,16 +1,42 @@
+// Header.js
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 import user from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../contants/navigation";
+import { auth } from "../store/fireBaseConfig";
+import logo1 from "../assets/logo1.png";
 
 const Header = () => {
   const location = useLocation();
   const removeSpace = location?.search?.slice(3).split("%20")?.join(" ");
   const [searchInput, setSearchInput] = useState(removeSpace);
+  const [userEmail, setUserEmail] = useState(null); // Kullanıcının e-posta adresini saklamak için state'i tanımlayın
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Kullanıcı oturum durumunu izleyin
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Kullanıcı oturum açmışsa kullanıcı e-posta adresini alın
+        setUserEmail(user.email);
+      } else {
+        // Kullanıcı oturum açmamışsa null olarak ayarlayın
+        setUserEmail(null);
+      }
+    });
+
+    // Aboneliği temizleyin
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = () => {
+    // Kullanıcı oturumunu sonlandırma
+    auth.signOut().then(() => {
+      // Çıkış yapıldıktan sonra anasayfaya yönlendirme
+      navigate("/");
+    });
+  };
   useEffect(() => {
     if (searchInput) {
       navigate(`/search?q=${searchInput}`);
@@ -26,7 +52,7 @@ const Header = () => {
       <div className="container mx-auto px-3 flex items-center h-full">
         {/* LOGO */}
         <Link to="/">
-          <img src={logo} alt="logo" width={120} />
+          <img src={logo1} alt="logo" width={120} />
         </Link>
 
         {/* NAVBAR */}
@@ -62,10 +88,26 @@ const Header = () => {
               <IoSearchOutline />
             </button>
           </form>
-          {/* LOGİN */}
-          <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer active:scale-50 transition-all">
-            <img src={user} alt="user" width="w-full h-full" />
-          </div>
+          {/* LOGIN */}
+          {/* Eğer kullanıcı giriş yapmışsa, kullanıcının e-posta adresini ve "Çıkış Yap" butonunu gösterin */}
+          {userEmail ? (
+            <div className="flex items-center gap-2">
+              <span className="text-white mr-2">{userEmail}</span>
+              <button
+                className="text-white hover:underline"
+                onClick={handleLogout}
+              >
+                Çıkış Yap
+              </button>
+            </div>
+          ) : (
+            // Kullanıcı giriş yapmamışsa, giriş yapma butonunu gösterin
+            <Link to="/login">
+              <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer active:scale-50 transition-all">
+                <img src={user} alt="user" width="w-full h-full" />
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </header>

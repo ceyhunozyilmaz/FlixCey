@@ -12,7 +12,7 @@ const useFetchDetails = (endpoint) => {
       setLoading(false);
       setData(response.data);
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   };
 
