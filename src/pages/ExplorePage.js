@@ -9,7 +9,15 @@ const ExplorePage = () => {
   const [data, setData] = useState([]);
   const [totalPageNo, setTotalPageNo] = useState(0);
 
-  // console.log("params", params.explore);
+  const getTitle = (exploreParam) => {
+    const titles = {
+      movie: "Popüler Filmler",
+      tv: "Popüler Diziler",
+      // Diğer parametreler için buraya ekleme yapabilirsiniz
+    };
+
+    return titles[exploreParam] || "Popüler İçerikler";
+  };
 
   const fetchData = async () => {
     try {
@@ -18,18 +26,16 @@ const ExplorePage = () => {
           page: pageNo,
         },
       });
-      setData((preve) => {
-        return [...preve, ...response.data.results];
-      });
+      setData((prev) => [...prev, ...response.data.results]);
       setTotalPageNo(response.data.total_pages);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
     }
   };
 
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      setPageNo((preve) => preve + 1);
+      setPageNo((prev) => prev + 1);
     }
   };
 
@@ -45,25 +51,26 @@ const ExplorePage = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <div className="py-16">
       <div className="container mx-auto">
-        <h3 className="capitalize text-lg lg:text-xl font-semibold my-3">
-          Popular {params.explore}
+        <h3 className="capitalize text-lg lg:text-xl font-semibold my- ">
+          {getTitle(params.explore)}
         </h3>
 
-        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start">
-          {data.map((exploreData, index) => {
-            return (
-              <Card
-                data={exploreData}
-                key={`${exploreData.id}-${index}-exploreSection`}
-                media_type={params.explore}
-              />
-            );
-          })}
+        <div className="grid grid-cols-[repeat(auto-fit,230px)]  gap-6 justify-center lg:justify-start sm:grid-flow-col-2">
+          {data.map((exploreData, index) => (
+            <Card
+              data={exploreData}
+              key={`${exploreData.id}-${index}-exploreSection`}
+              media_type={params.explore}
+            />
+          ))}
         </div>
       </div>
     </div>

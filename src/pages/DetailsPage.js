@@ -24,9 +24,6 @@ const DetailsPage = () => {
   const [playVideo, setPlayVideo] = useState(false);
   const [playVideoId, setPlayVideoId] = useState("");
 
-  console.log("data", data);
-  console.log("star cast", castData);
-
   const handlePlayVideo = (data) => {
     setPlayVideoId(data);
     setPlayVideo(true);
@@ -125,7 +122,7 @@ const DetailsPage = () => {
               ?.filter((el) => el?.profile_path)
               .map((starCast, index) => {
                 return (
-                  <div>
+                  <div key={starCast.id}>
                     <div>
                       <img
                         src={imageURL + starCast?.profile_path}
